@@ -6,6 +6,7 @@
 <title>Sajal — WordPress Developer</title>
 <meta name="description" content="Sajal — WordPress Developer & UI/UX based in Dubai, UAE. Building fast, clean, responsive websites.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -275,6 +276,192 @@
   .marquee-wrap.reverse .marquee-track span{color:var(--white); -webkit-text-stroke:1px var(--white);}
   .marquee-wrap.reverse .marquee-track span:nth-child(even){color:transparent;}
   .marquee-track span::after{content:"—"; opacity:.6; -webkit-text-stroke:0;}
+
+
+
+.tools-grid{
+        display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
+    margin-top:35px;
+    width:100%;
+}
+
+.tool-card{
+   
+height:78px;
+
+display:flex;
+flex-direction:row;
+justify-content:flex-start;
+align-items:center;
+
+padding:0 22px;
+
+gap:18px;
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+background:#111;
+
+transition:.35s;
+}
+
+.tool-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(135deg,rgba(255,70,50,.18),transparent);
+    opacity:0;
+    transition:.35s;
+}
+
+.tool-card:hover::before{
+    opacity:1;
+}
+
+.tool-card:hover{
+    transform:translateY(-8px);
+    border-color:#ff4d35;
+    box-shadow:0 20px 40px rgba(255,70,50,.18);
+}
+
+.tool-card i{
+  
+font-size:30px;
+min-width:34px;
+
+}
+
+.tool-card span{
+   font-size:17px;
+font-weight:500;
+}
+
+.tool-card:hover span{
+    color:#fff;
+}
+
+.tool-card:hover i{
+    transform:scale(1.15);
+}
+
+
+@media (max-width:1200px){
+
+.tools-grid{
+    grid-template-columns:repeat(3,1fr);
+}
+
+}
+
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (max-width:991px){
+
+.tools-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.tool-card{
+    min-height:78px;
+    padding:0 18px;
+}
+
+.tool-card i{
+    font-size:26px;
+}
+
+.tool-card span{
+    font-size:15px;
+}
+
+}
+
+
+/* ===========================
+   Mobile
+=========================== */
+
+@media (max-width:768px){
+
+.tools-block{
+    margin-top:45px;
+}
+
+.tools-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-left: 34px;
+}
+
+.tool-card{
+    min-height:70px;
+    padding:0 15px;
+    border-radius:16px;
+}
+
+.tool-card i{
+    font-size:24px;
+}
+
+.tool-card span{
+    font-size:14px;
+}
+
+}
+
+
+/* ===========================
+   Small Mobile
+=========================== */
+
+@media (max-width:480px){
+
+.tools-grid{
+    grid-template-columns:1fr;
+}
+
+.tool-card{
+    justify-content:flex-start;
+    min-height:65px;
+}
+
+.tool-card span{
+    font-size:15px;
+}
+
+}
+
+/* Brand Colors */
+
+.wordpress i{color:#21759b;}
+.elementor i{color:#92003b;}
+.divi i{color:#8e44ff;}
+.figma i{color:#f24e1e;}
+.html i{color:#e34f26;}
+.css i{color:#1572b6;}
+.javascript i{color:#f7df1e;}
+.php i{color:#777bb4;}
+.hosting i{color:#6c63ff;}
+.seo i{color:#ff4d35;}
+
+.tool-card:hover.wordpress{border-color:#21759b;box-shadow:0 0 35px rgba(33,117,155,.35);}
+.tool-card:hover.elementor{border-color:#92003b;box-shadow:0 0 35px rgba(146,0,59,.35);}
+.tool-card:hover.divi{border-color:#8e44ff;box-shadow:0 0 35px rgba(142,68,255,.35);}
+.tool-card:hover.figma{border-color:#f24e1e;box-shadow:0 0 35px rgba(242,78,30,.35);}
+.tool-card:hover.html{border-color:#e34f26;box-shadow:0 0 35px rgba(227,79,38,.35);}
+.tool-card:hover.css{border-color:#1572b6;box-shadow:0 0 35px rgba(21,114,182,.35);}
+.tool-card:hover.javascript{border-color:#f7df1e;box-shadow:0 0 35px rgba(247,223,30,.35);}
+.tool-card:hover.php{border-color:#777bb4;box-shadow:0 0 35px rgba(119,123,180,.35);}
+.tool-card:hover.hosting{border-color:#6c63ff;box-shadow:0 0 35px rgba(108,99,255,.35);}
+.tool-card:hover.seo{border-color:#ff4d35;box-shadow:0 0 35px rgba(255,77,53,.35);}
 
   /* ===== SERVICES ===== */
   .services-list{border-top:1px solid var(--line-dark);}
@@ -667,7 +854,154 @@
   </div>
 </div>
 
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="section--dark">
+  <div class="wrap about-grid">
+    <div class="about-visual reveal">
+      <div class="about-photo">
+        <!-- <svg viewBox="0 0 200 200" fill="none">
+          <circle cx="100" cy="80" r="34" stroke="#FF4433" stroke-width="1.4" opacity=".8"/>
+          <path d="M50 165c8-30 30-46 50-46s42 16 50 46" stroke="#FF4433" stroke-width="1.4" opacity=".8"/>
+          <path d="M40 30 L60 30 L60 34 L44 34 L44 46 L58 46 L58 50 L44 50 L44 64 L40 64 Z" fill="#FF4433" opacity=".5"/>
+        </svg> -->
+        <img  src="images/sajal.png" alt="">
+      </div>
+      <div class="stat-row">
+        <div class="stat-card"><b class="count-up" data-target="3">0</b><span>Years Experience</span></div>
+        <div class="stat-card"><b class="count-up" data-target="20">0</b><span>Projects Completed</span></div>
+      </div>
+    </div>
 
+    <div class="reveal">
+      <div class="eyebrow"><span class="ln"></span> About Me</div>
+      <h2 style="font-size:clamp(30px,4.4vw,58px); margin-bottom:30px; font-weight:400;">Who <span class="accent">am i </span>??</h2>
+      <div class="about-body">
+        <p>I'm <b>Sajal</b>,a Web Developer passionate about building modern, high-performing websites that combine clean design with exceptional functionality. I specialize in WordPress, Elementor, HTML, CSS, JavaScript, PHP, and hosting management, creating responsive, SEO-friendly websites that help businesses grow online. With a strong focus on performance, user experience, and attention to detail, I enjoy turning ideas into impactful digital products.</p>
+        <blockquote>"A great website is as much about the relationship as it is about the code."</blockquote>
+        <p>From custom Elementor layouts to hand-coded functionality in PHP, HTML, CSS, and JavaScript, I handle the <b>full website lifecycle</b> — planning, design, development, hosting setup, and deployment. I've managed server environments across Hostinger, GoDaddy, and A2 Hosting, and I know how to keep a site running smoothly long after launch.</p>
+      </div>
+
+      <div class="tools-block">
+        <h4></h4>
+        <div class="tools-list">
+        <div class="tools-block">
+    <h4>Tools I Use</h4>
+
+    <div class="tools-grid">
+      <!-- this is skills -->
+
+        <div class="tool-card wordpress">
+            <i class="fa-brands fa-wordpress-simple"></i>
+            <span>WordPress</span>
+        </div>
+
+        <div class="tool-card elementor">
+            <i class="fa-brands fa-elementor"></i>
+            <span>Elementor</span>
+        </div>
+
+        <div class="tool-card divi">
+            <i class="fa-solid fa-table-cells-large"></i>
+            <span>Divi</span>
+        </div>
+
+        <div class="tool-card figma">
+            <i class="fa-brands fa-figma"></i>
+            <span>Figma</span>
+        </div>
+
+        <div class="tool-card html">
+            <i class="fa-brands fa-html5"></i>
+            <span>HTML5</span>
+        </div>
+
+        <div class="tool-card css">
+            <i class="fa-brands fa-css3-alt"></i>
+            <span>CSS3</span>
+        </div>
+
+        <div class="tool-card javascript">
+            <i class="fa-brands fa-js"></i>
+            <span>JavaScript</span>
+        </div>
+
+        <div class="tool-card php">
+            <i class="fa-brands fa-php"></i>
+            <span>PHP</span>
+        </div>
+
+        <div class="tool-card hosting">
+            <i class="fa-solid fa-server"></i>
+            <span>Hosting</span>
+        </div>
+
+        <div class="tool-card seo">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+            <span>SEO</span>
+        </div>
+
+    </div>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills">
+  <div class="bg-word" aria-hidden="true">SKILLS</div>
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow"><span class="ln"></span> Skills &amp; Expertise</div>
+      <h2>Numbers behind the <span class="accent">code.</span></h2>
+      <p class="sub">A snapshot of where I spend most of my time — from the CMS itself to the code and search visibility around it.</p>
+    </div>
+
+    <div class="ledger">
+      <div>
+        <div class="ledger-item reveal" data-pct="95">
+          <div class="ledger-top"><b>WordPress</b><span class="ledger-leader"></span><span class="pct mono">95%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="90">
+          <div class="ledger-top"><b>HTML5</b><span class="ledger-leader"></span><span class="pct mono">90%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="85">
+          <div class="ledger-top"><b>CSS3</b><span class="ledger-leader"></span><span class="pct mono">85%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="84">
+          <div class="ledger-top"><b>JavaScript</b><span class="ledger-leader"></span><span class="pct mono">84%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="85">
+          <div class="ledger-top"><b>Figma</b><span class="ledger-leader"></span><span class="pct mono">85%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="ledger-item reveal" data-pct="95">
+          <div class="ledger-top"><b>Elementor</b><span class="ledger-leader"></span><span class="pct mono">95%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="90">
+          <div class="ledger-top"><b>Server Management</b><span class="ledger-leader"></span><span class="pct mono">90%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="95">
+          <div class="ledger-top"><b>SEO</b><span class="ledger-leader"></span><span class="pct mono">95%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+        <div class="ledger-item reveal" data-pct="90">
+          <div class="ledger-top"><b>CMS</b><span class="ledger-leader"></span><span class="pct mono">90%</span></div>
+          <div class="ledger-bar"><div class="ledger-fill"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ===================== SPECIALISED / SERVICES ===================== -->
 <section id="specialised" class="section--dark">
