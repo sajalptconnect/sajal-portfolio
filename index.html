@@ -783,20 +783,73 @@
   .fm-contact b{color:var(--white); display:block; font-family:'Inter',sans-serif; font-weight:600; font-size:14px; margin-top:4px;}
 
   /* ===== HERO ===== */
-  .hero{min-height:100vh; padding-top:calc(var(--nav-h) + 40px); padding-bottom:60px; position:relative; display:flex; flex-direction:column; justify-content:center; overflow:hidden; position:relative; min-height:100vh; overflow:hidden;}
-  .hero-watermark{
-    position:absolute; top:50%; left:50%; transform:translate(-50%,-52%); font-family:'Anton',sans-serif; font-size:min(42vw,620px);
-    color:transparent; -webkit-text-stroke:1px rgba(245,243,238,.06); line-height:1; z-index:0; pointer-events:none;
-    user-select:none; white-space:nowrap;
-  }
+  .hero {
+    position: relative;
+    min-height: 100vh;
 
-  .hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,.35);   /* optional dark overlay */
-    z-index:1;
+    padding-top: calc(var(--nav-h) + 40px);
+    padding-bottom: 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #050505;
 }
+
+/* =========================
+   HERO BACKGROUND VIDEO
+========================= */
+
+.hero-video {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+ .hero-watermark,
+.hero-blueprint {
+    z-index: 2;
+}
+
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 75% 45%,
+            rgba(255, 68, 51, 0.12),
+            transparent 38%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(0, 0, 0, 0.78) 0%,
+            rgba(0, 0, 0, 0.48) 45%,
+            rgba(0, 0, 0, 0.38) 100%
+        );
+}
+
 
   .hero-bg{
     position:absolute;
@@ -806,9 +859,9 @@
     object-fit:cover;
     z-index:0;
 }
- .hero-inner{
-    position:relative;
-    z-index:2;
+.hero-inner {
+    position: relative;
+    z-index: 3;
 }
   .hero-label {
     display: flex;
@@ -1672,8 +1725,19 @@ font-weight:500;
 
 <!-- ===================== HERO ===================== -->
 <section id="home" class="hero">
-   <img src="images/hero-bg.jpg" class="hero-bg" alt="Hero Background">
-  <div class="hero-watermark" aria-hidden="true">S.</div>
+   <video
+    class="hero-bg hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    poster="images/hero-bg.jpg"
+>
+    <source src="images/bgv.mp4" type="video/mp4">
+    
+</video>
+  <div class="hero-watermark" aria-hidden="true"></div>
   <div class="hero-blueprint" aria-hidden="true">
     <svg viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="8" y="8" width="304" height="244" rx="4" stroke="#FF4433" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
