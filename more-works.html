@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Works — Sajal PT</title>
+
+    <!-- Use your existing stylesheet/fonts here if needed -->
+    <style>
+        :root {
+            --white: #f5f4ef;
+            --card: #ffffff;
+            --ink: #111111;
+            --muted-dark: #686760;
+            --line: #d8d6cf;
+            --ember: #ff4035;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--white);
+            color: var(--ink);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* HEADER */
+        .works-page-header {
+            width: min(1320px, 88vw);
+            margin: 0 auto;
+            padding: 90px 0 55px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .section-label {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--ember);
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+        }
+
+        .works-page-header h1 {
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-size: clamp(58px, 8vw, 120px);
+            font-weight: 400;
+            line-height: .85;
+            text-transform: uppercase;
+        }
+
+        .works-page-header h1 span {
+            color: var(--ember);
+        }
+
+        .works-intro {
+            max-width: 430px;
+            color: var(--muted-dark);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* GRID */
+        .projects-grid {
+            width: min(1320px, 88vw);
+            margin: 0 auto 120px;
+
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        /* CARD */
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            overflow: hidden;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,.04);
+            transition:
+                transform .35s ease,
+                box-shadow .35s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 18px 45px rgba(0,0,0,.09);
+        }
+
+        /* IMAGE */
+        .project-media {
+            position: relative;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        .project-media a {
+            position: relative;
+            display: block;
+        }
+
+        .project-media img {
+            display: block;
+            width: 100%;
+            height: 245px;
+            object-fit: cover;
+            object-position: top;
+            transition: transform .6s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .project-media a:hover img {
+            transform: scale(1.04);
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 2;
+
+            padding: 8px 13px;
+            border-radius: 999px;
+
+            background: var(--ember);
+            color: #111;
+
+            font-family: "Courier New", monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        .media-view {
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+
+            padding: 8px 12px;
+            border-radius: 999px;
+
+            background: rgba(17,17,17,.9);
+            color: #fff;
+
+            font-family: "Courier New", monospace;
+            font-size: 9px;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+
+            opacity: 0;
+            transform: translateY(8px);
+            transition: .3s ease;
+        }
+
+        .project-media a:hover .media-view {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CONTENT */
+        .project-content {
+            padding: 25px 25px 28px;
+        }
+
+        .project-number {
+            margin-bottom: 14px;
+
+            color: #d9d8d2;
+
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-size: 62px;
+            line-height: .8;
+        }
+
+        .project-type {
+            display: block;
+            margin-bottom: 9px;
+
+            color: var(--ember);
+
+            font-family: "Courier New", monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .project-content h2 {
+            margin-bottom: 15px;
+
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+            font-size: 34px;
+            font-weight: 400;
+            line-height: .95;
+            text-transform: uppercase;
+        }
+
+        .project-content p {
+            margin-bottom: 20px;
+
+            color: var(--muted-dark);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* TAGS */
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 23px;
+        }
+
+        .project-tags span {
+            padding: 6px 10px;
+
+            border: 1px solid var(--line);
+            border-radius: 999px;
+
+            color: var(--muted-dark);
+
+            font-family: "Courier New", monospace;
+            font-size: 9px;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
+        /* LINK */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            width: max-content;
+
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--ink);
+
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+
+            transition: .25s ease;
+        }
+
+        .project-link:hover {
+            gap: 15px;
+            color: var(--ember);
+            border-color: var(--ember);
+        }
+
+        /* BACK LINK */
+        .back-link {
+            display: block;
+            width: min(1320px, 88vw);
+            margin: 0 auto 45px;
+
+            font-family: "Courier New", monospace;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+        }
+
+        .back-link span {
+            color: var(--ember);
+        }
+
+        /* TABLET */
+        @media (max-width: 1000px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .works-page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 650px) {
+            .works-page-header {
+                width: 92vw;
+                padding: 65px 0 40px;
+            }
+
+            .projects-grid {
+                width: 92vw;
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-bottom: 80px;
+            }
+
+            .project-media img {
+                height: 220px;
+            }
+
+            .project-content {
+                padding: 23px 20px 26px;
+            }
+
+            .project-number {
+                font-size: 57px;
+            }
+
+            .project-content h2 {
+                font-size: 31px;
+            }
+
+            .media-view {
+                opacity: 1;
+                transform: none;
+            }
+
+            .back-link {
+                width: 92vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    
+
+    <header class="works-page-header">
+        <div>
+            <span class="section-label">SELECTED WORKS</span>
+            <h1>MORE <span>WORKS</span></h1>
+        </div>
+
+        <p class="works-intro">
+            A collection of websites and digital experiences I've designed
+            and developed for businesses, brands, e-commerce stores and
+            organizations.
+        </p>
+    </header>
+
+
+    <main class="projects-grid">
+
+        <!-- PROJECT 01 -->
+        <article class="project-card">
+            <div class="project-media">
+                <span class="project-badge">Property / Leasing</span>
+
+                <a href="https://metraleasing.ca/"
+                   target="_blank"
+                   rel="noopener">
+                    <img src="images/metra.png"
+                         alt="Metra Leasing website">
+
+                    <span class="media-view">View Site ↗</span>
+                </a>
+            </div>
+
+            <div class="project-content">
+                <div class="project-number">01</div>
+
+                <span class="project-type">Property Management</span>
+
+                <h2>Metra Leasing</h2>
+
+                <p>
+                    A professional property leasing and management website
+                    designed to make renting simple and stress-free. The site
+                    presents leasing services, properties, tenants and owners
+                    through a clean corporate interface.
+                </p>
+
+                <div class="project-tags">
+                    <span>WordPress</span>
+                    <span>Elementor</span>
+                    <span>Property</span>
+                </div>
+
+                <a href="https://metraleasing.ca/"
+                   target="_blank"
+                   rel="noopener"
+                   class="project-link">
+                    Visit Site <span>↗</span>
+                </a>
+            </div>
+        </article>
+
+
+        <!-- PROJECT 02 -->
+        <article class="project-card">
+            <div class="project-media">
+                <span class="project-badge">Food / FMCG</span>
+
+                <a href="https://choiceinternational.net/"
+                   target="_blank"
+                   rel="noopener">
+                    <img src="images/choice.png"
+                         alt="Choice International website">
+
+                    <span class="media-view">View Site ↗</span>
+                </a>
+            </div>
+
+            <div class="project-content">
+                <div class="project-number">02</div>
+
+                <span class="project-type">Food &amp; Beverage</span>
+
+                <h2>Choice International</h2>
+
+                <p>
+                    A modern product-focused website for Choice International,
+                    showcasing its food and beverage offerings with a clean
+                    layout, strong product presentation and an easy-to-navigate
+                    structure.
+                </p>
+
+                <div class="project-tags">
+                    <span>WordPress</span>
+                    <span>Elementor</span>
+                    <span>Corporate</span>
+                </div>
+
+                <a href="https://choiceinternational.net/"
+                   target="_blank"
+                   rel="noopener"
+                   class="project-link">
+                    Visit Site <span>↗</span>
+                </a>
+            </div>
+        </article>
+
+
+        <!-- PROJECT 03 -->
+        <article class="project-card">
+            <div class="project-media">
+                <span class="project-badge">E-Commerce</span>
+
+                <a href="https://groohome.com/"
+                   target="_blank"
+                   rel="noopener">
+                    <img src="images/grohome.png"
+                         alt="Groohome e-commerce website">
+
+                    <span class="media-view">View Site ↗</span>
+                </a>
+            </div>
+
+            <div class="project-content">
+                <div class="project-number">03</div>
+
+                <span class="project-type">Online Store</span>
+
+                <h2>Groohome</h2>
+
+                <p>
+                    A vibrant e-commerce experience created for an online
+                    shopping platform featuring toys, educational products,
+                    home items and everyday essentials, with product search,
+                    categories and shopping functionality.
+                </p>
+
+                <div class="project-tags">
+                    <span>WordPress</span>
+                    <span>WooCommerce</span>
+                    <span>Elementor</span>
+                </div>
+
+                <a href="https://groohome.com/"
+                   target="_blank"
+                   rel="noopener"
+                   class="project-link">
+                    Visit Site <span>↗</span>
+                </a>
+            </div>
+        </article>
+
+
+        <!-- PROJECT 04 -->
+        <article class="project-card">
+            <div class="project-media">
+                <span class="project-badge">Foundation</span>
+
+                <a href="https://isvfoundation.com/"
+                   target="_blank"
+                   rel="noopener">
+                    <img src="images/islv.png"
+                         alt="ISV Foundation website">
+
+                    <span class="media-view">View Site ↗</span>
+                </a>
+            </div>
+
+            <div class="project-content">
+                <div class="project-number">04</div>
+
+                <span class="project-type">Non-Profit / Foundation</span>
+
+                <h2>ISV Foundation</h2>
+
+                <p>
+                    A purpose-driven website for ISV Foundation, focused on
+                    presenting its mission, partnerships and initiatives while
+                    creating a clear path for visitors to learn more and
+                    contribute.
+                </p>
+
+                <div class="project-tags">
+                    <span>WordPress</span>
+                    <span>Elementor</span>
+                    <span>UI/UX</span>
+                </div>
+
+                <a href="https://isvfoundation.com/"
+                   target="_blank"
+                   rel="noopener"
+                   class="project-link">
+                    Visit Site <span>↗</span>
+                </a>
+            </div>
+        </article>
+
+
+ 
+        <!-- PROJECT 05 -->
+        <article class="project-card"><div class="project-media"><span class="project-badge">Digital Agency</span><a href="https://creatifdigitalsolutions.com/" target="_blank" rel="noopener"><img src="images/project-creatif.jpeg" alt="Creatif"><span class="media-view">View Site ↗</span></a></div><div class="project-content"><div class="project-number">05</div><span class="project-type">Digital Solutions</span><h2>Creatif Digital Solutions</h2><p>A modern digital agency website showcasing web development, branding, marketing and creative services.</p><div class="project-tags"><span>WordPress</span><span>Elementor</span><span>Agency</span></div><a href="https://creatifdigitalsolutions.com/" target="_blank" class="project-link">Visit Site <span>↗</span></a></div></article>
+        <!-- PROJECT 06 --><article class="project-card"><div class="project-media"><span class="project-badge">Food & Beverage</span><a href="https://tenderwonder.net/" target="_blank"><img src="images/project-tenderwonder.jpeg"><span class="media-view">View Site ↗</span></a></div><div class="project-content"><div class="project-number">06</div><span class="project-type">Product Website</span><h2>Tender Wonder</h2><p>Premium coconut beverage product website with modern responsive design.</p><div class="project-tags"><span>WordPress</span><span>Elementor</span><span>FMCG</span></div><a href="https://tenderwonder.net/" target="_blank" class="project-link">Visit Site <span>↗</span></a></div></article>
+        <!-- PROJECT 07 --><article class="project-card"><div class="project-media"><span class="project-badge">Art Gallery</span><a href="https://daddyzart.com/" target="_blank"><img src="images/project-daddyzart.png"><span class="media-view">View Site ↗</span></a></div><div class="project-content"><div class="project-number">07</div><span class="project-type">Art Gallery</span><h2>Daddyz Art Gallery</h2><p>Elegant website showcasing artwork, exhibitions and creative events.</p><div class="project-tags"><span>WordPress</span><span>Elementor</span><span>Gallery</span></div><a href="https://daddyzart.com/" target="_blank" class="project-link">Visit Site <span>↗</span></a></div></article>
+        <!-- PROJECT 08 --><article class="project-card"><div class="project-media"><span class="project-badge">Construction</span><a href="https://perumpallil.com/" target="_blank"><img src="images/project-daddyzart.jpeg"><span class="media-view">View Site ↗</span></a></div><div class="project-content"><div class="project-number">08</div><span class="project-type">Construction Company</span><h2>Perumpallil</h2><p>Corporate construction website highlighting services and projects.</p><div class="project-tags"><span>WordPress</span><span>Corporate</span><span>Construction</span></div><a href="https://perumpallil.com/" target="_blank" class="project-link">Visit Site <span>↗</span></a></div></article>
+        <!-- PROJECT 09 --><article class="project-card"><div class="project-media"><span class="project-badge">Consumer Products</span><a href="https://shotproproducts.com/" target="_blank"><img src="images/shot.png"><span class="media-view">View Site ↗</span></a></div><div class="project-content"><div class="project-number">09</div><span class="project-type">Product Website</span><h2>Shot Pro Products</h2><p>Responsive product website for consumer products with modern presentation.</p><div class="project-tags"><span>WordPress</span><span>Elementor</span><span>Products</span></div><a href="https://shotproproducts.com/" target="_blank" class="project-link">Visit Site <span>↗</span></a></div></article>
+
+        <!--
+        ============================================
+        ADD MORE PROJECTS HERE
+        ============================================
+
+        Copy the project-card below and change:
+        - number
+        - badge
+        - image
+        - website link
+        - title
+        - description
+        - tags
+
+        Example:
+
+        <article class="project-card">
+            ...
+        </article>
+        -->
+
+    </main>
+
+
+    <a href="index.html" class="back-link">
+        <span>←</span> Back to Portfolio
+    </a>
+
+</body>
+</html>
