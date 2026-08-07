@@ -92,17 +92,610 @@
   .btn:hover .btn-arrow{transform:translate(4px,-4px);}
 
   /* ===== LOADER ===== */
-  #loader{
-    position:fixed; inset:0; z-index:1000; background:var(--black); color:var(--white);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    transition:transform .9s var(--ease);
-  }
+ #loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #080808;
+    color: #fff;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity 0.8s cubic-bezier(.76, 0, .24, 1),
+        visibility 0.8s;
+}
   #loader .loader-word{font-family:'Anton',sans-serif; font-size:clamp(48px,11vw,140px); letter-spacing:-.02em; overflow:hidden; text-transform:uppercase;}
   #loader .loader-word span{display:inline-block; transform:translateY(110%);}
   #loader .loader-bar-wrap{width:min(320px,60vw); height:1px; background:var(--line-dark); margin-top:34px; position:relative;}
   #loader .loader-bar{position:absolute; left:0; top:0; height:100%; width:0%; background:var(--ember);}
   #loader .loader-pct{font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:.1em; color:var(--muted); margin-top:18px;}
   #loader.hide{transform:translateY(-100%);}
+
+  /* =====================================
+   BACKGROUND GRID
+===================================== */
+
+.loader-grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.13;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.04) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image:
+        radial-gradient(
+            circle at center,
+            black 0%,
+            transparent 75%
+        );
+}
+
+
+/* RED ATMOSPHERIC GLOW */
+
+.loader-glow {
+    position: absolute;
+
+    width: 600px;
+    height: 600px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 60, 47, .12),
+            transparent 65%
+        );
+
+    filter: blur(30px);
+
+    animation: loaderGlow 3s ease-in-out infinite alternate;
+}
+
+
+@keyframes loaderGlow {
+
+    from {
+        transform:
+            translate(-50%, -50%)
+            scale(.8);
+
+        opacity: .5;
+    }
+
+    to {
+        transform:
+            translate(-50%, -50%)
+            scale(1.15);
+
+        opacity: 1;
+    }
+}
+
+
+/* =====================================
+   CONTENT
+===================================== */
+
+.loader-content {
+    position: relative;
+    z-index: 5;
+
+    width: min(760px, 82vw);
+}
+
+
+/* STATUS */
+
+.loader-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+    color: rgba(255,255,255,.4);
+
+    font-size: 9px;
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+}
+
+
+.loader-status-dot {
+    position: relative;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #ff3c2f;
+
+    box-shadow:
+        0 0 12px rgba(255,60,47,.8);
+}
+
+
+.loader-status-dot::after {
+    content: "";
+
+    position: absolute;
+    inset: -5px;
+
+    border: 1px solid rgba(255,60,47,.5);
+    border-radius: 50%;
+
+    animation: loaderDotPulse 1.6s infinite;
+}
+
+
+@keyframes loaderDotPulse {
+
+    0% {
+        transform: scale(.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+
+/* =====================================
+   MAIN NAME
+===================================== */
+
+.loader-word-wrap {
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 5px 0 12px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.12);
+}
+
+
+.loader-word {
+    position: relative;
+
+    display: inline-block;
+
+    font-size: clamp(70px, 10vw, 145px);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-weight: 700;
+
+    line-height: .82;
+
+    letter-spacing: -7px;
+
+    color: #f5f5f5;
+}
+
+
+.loader-word span {
+    display: inline-block;
+
+    animation:
+        loaderWordIn
+        1s
+        cubic-bezier(.16,1,.3,1)
+        both;
+}
+
+
+@keyframes loaderWordIn {
+
+    from {
+        transform: translateY(120%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* OUTLINE SHADOW */
+
+.loader-word::before {
+    content: attr(data-text);
+
+    position: absolute;
+
+    left: 4px;
+    top: 4px;
+
+    z-index: -1;
+
+    color: transparent;
+
+    -webkit-text-stroke:
+        1px rgba(255,60,47,.6);
+
+    opacity: .65;
+}
+
+
+/* =====================================
+   SCANNING RED LINE
+===================================== */
+
+.loader-scan {
+    position: absolute;
+
+    left: -30%;
+    bottom: 0;
+
+    width: 30%;
+    height: 2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #ff3c2f,
+            #ff7b70,
+            transparent
+        );
+
+    box-shadow:
+        0 0 15px rgba(255,60,47,.7);
+
+    animation:
+        loaderScan
+        1.6s
+        cubic-bezier(.65,0,.35,1)
+        infinite;
+}
+
+
+@keyframes loaderScan {
+
+    from {
+        left: -30%;
+    }
+
+    to {
+        left: 100%;
+    }
+}
+
+
+/* =====================================
+   BOTTOM SECTION
+===================================== */
+
+.loader-bottom {
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    align-items: end;
+
+    gap: 40px;
+
+    margin-top: 26px;
+}
+
+
+.loader-progress-area {
+    width: 100%;
+}
+
+
+.loader-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 11px;
+
+    color: rgba(255,255,255,.32);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+/* =====================================
+   PROGRESS BAR
+===================================== */
+
+.loader-bar-wrap {
+    position: relative;
+
+    width: 100%;
+    height: 2px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.loader-bar {
+    position: relative;
+
+    width: 0%;
+    height: 100%;
+
+    background: #ff3c2f;
+
+    transition:
+        width .25s ease;
+
+    box-shadow:
+        0 0 14px rgba(255,60,47,.8);
+}
+
+
+.loader-bar::after {
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    transform: translate(50%, -50%);
+
+    box-shadow:
+        0 0 12px #ff3c2f;
+}
+
+
+/* =====================================
+   CIRCULAR PROGRESS
+===================================== */
+
+.loader-circle {
+    position: relative;
+
+    width: 78px;
+    height: 78px;
+}
+
+
+.loader-circle svg {
+    width: 100%;
+    height: 100%;
+
+    transform: rotate(-90deg);
+}
+
+
+.loader-circle circle {
+    fill: none;
+    stroke-width: 1.4;
+}
+
+
+.loader-circle-bg {
+    stroke:
+        rgba(255,255,255,.12);
+}
+
+
+.loader-circle-progress {
+    stroke: #ff3c2f;
+
+    stroke-linecap: round;
+
+    stroke-dasharray: 276.46;
+    stroke-dashoffset: 276.46;
+
+    filter:
+        drop-shadow(
+            0 0 4px
+            rgba(255,60,47,.7)
+        );
+
+    transition:
+        stroke-dashoffset
+        .25s ease;
+}
+
+
+.loader-pct {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color: rgba(255,255,255,.75);
+}
+
+
+/* =====================================
+   CORNER UI ELEMENTS
+===================================== */
+
+.loader-corner {
+    position: absolute;
+
+    width: 25px;
+    height: 25px;
+
+    opacity: .3;
+}
+
+
+.corner-tl {
+    top: 30px;
+    left: 30px;
+
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+}
+
+
+.corner-tr {
+    top: 30px;
+    right: 30px;
+
+    border-top: 1px solid white;
+    border-right: 1px solid white;
+}
+
+
+.corner-bl {
+    bottom: 30px;
+    left: 30px;
+
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+}
+
+
+.corner-br {
+    bottom: 30px;
+    right: 30px;
+
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+}
+
+
+/* =====================================
+   LOADER EXIT
+===================================== */
+
+#loader.loader-complete {
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+#loader.loader-complete .loader-word {
+    transform: translateY(-30px);
+    opacity: 0;
+
+    transition:
+        transform .7s cubic-bezier(.76,0,.24,1),
+        opacity .5s ease;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media (max-width: 600px) {
+
+    .loader-content {
+        width: 84vw;
+    }
+
+    .loader-word {
+        font-size: clamp(60px, 22vw, 100px);
+        letter-spacing: -5px;
+    }
+
+    .loader-bottom {
+        gap: 20px;
+    }
+
+    .loader-circle {
+        width: 62px;
+        height: 62px;
+    }
+
+    .loader-info span:last-child {
+        display: none;
+    }
+
+    .loader-corner {
+        width: 18px;
+        height: 18px;
+    }
+
+    .corner-tl {
+        top: 20px;
+        left: 20px;
+    }
+
+    .corner-tr {
+        top: 20px;
+        right: 20px;
+    }
+
+    .corner-bl {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .corner-br {
+        bottom: 20px;
+        right: 20px;
+    }
+}
+
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .loader-glow,
+    .loader-scan,
+    .loader-status-dot::after {
+        animation: none;
+    }
+}
 
   /* ===== CUSTOM CURSOR ===== */
   .cursor-dot, .cursor-ring{position:fixed; top:0; left:0; pointer-events:none; z-index:999; border-radius:50%; transform:translate(-50%,-50%); will-change:transform;}
@@ -950,9 +1543,80 @@ font-weight:500;
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader" aria-hidden="true">
-  <div class="loader-word"><span id="loaderText">SAJAL</span></div>
-  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
-  <div class="loader-pct mono" id="loaderPct">00%</div>
+
+    <!-- Background effects -->
+    <div class="loader-grid"></div>
+    <div class="loader-glow"></div>
+
+    <!-- Corner decorations -->
+    <span class="loader-corner corner-tl"></span>
+    <span class="loader-corner corner-tr"></span>
+    <span class="loader-corner corner-bl"></span>
+    <span class="loader-corner corner-br"></span>
+
+    <div class="loader-content">
+
+        <!-- Small heading -->
+        <div class="loader-status mono">
+            <span class="loader-status-dot"></span>
+            INITIALIZING EXPERIENCE
+        </div>
+
+        <!-- Main name -->
+        <div class="loader-word-wrap">
+            <div class="loader-word" data-text="SAJAL">
+                <span id="loaderText">SAJAL</span>
+            </div>
+
+            <div class="loader-scan"></div>
+        </div>
+
+        <!-- Bottom loading area -->
+        <div class="loader-bottom">
+
+            <div class="loader-progress-area">
+
+                <div class="loader-info mono">
+                    <span>LOADING</span>
+                    <span>PORTFOLIO / 2026</span>
+                </div>
+
+                <div class="loader-bar-wrap">
+                    <div class="loader-bar" id="loaderBar"></div>
+                </div>
+
+            </div>
+
+            <!-- Circular percentage -->
+            <div class="loader-circle">
+
+                <svg viewBox="0 0 100 100">
+                    <circle
+                        class="loader-circle-bg"
+                        cx="50"
+                        cy="50"
+                        r="44"
+                    />
+
+                    <circle
+                        class="loader-circle-progress"
+                        id="loaderCircle"
+                        cx="50"
+                        cy="50"
+                        r="44"
+                    />
+                </svg>
+
+                <div class="loader-pct mono" id="loaderPct">
+                    00%
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 <!-- ===================== CUSTOM CURSOR ===================== -->
