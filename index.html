@@ -240,7 +240,208 @@
   .hero-lead{color:#EDEAE1; font-size:18px; max-width:440px; font-family: 'Poppins', sans-serif;
 }
   .hero-actions{display:flex; gap:16px; flex-wrap:wrap; margin-top:32px;}
-  .hero-socials{display:flex; align-items:center; gap:20px; font-family:'JetBrains Mono',monospace; font-size:12.5px; flex-wrap:wrap; justify-content:flex-end;}
+  .hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 8px 10px 8px 16px;
+
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+  .social-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    white-space: nowrap;
+
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: rgba(255, 255, 255, 0.55);
+
+    padding-right: 16px;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+
+/* Animated red indicator */
+
+.social-dot {
+    position: relative;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+    background: #ff4136;
+
+    box-shadow: 0 0 12px rgba(255, 65, 54, 0.8);
+}
+
+.social-dot::after {
+    content: "";
+
+    position: absolute;
+    inset: -4px;
+
+    border: 1px solid rgba(255, 65, 54, 0.5);
+    border-radius: 50%;
+
+    animation: socialPulse 2s infinite;
+}
+
+@keyframes socialPulse {
+    0% {
+        transform: scale(.7);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+
+
+/* LINKS CONTAINER */
+
+.social-links {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+/* EACH SOCIAL LINK */
+
+.hero-socials .social-link {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 7px 9px;
+
+    border-radius: 8px;
+
+    color: rgba(255, 255, 255, 0.62);
+    text-decoration: none;
+
+    font-size: 11px;
+    letter-spacing: .4px;
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease;
+}
+
+
+/* ICON */
+
+.social-icon {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 6px;
+
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    font-size: 12px;
+
+    transition: all .3s ease;
+}
+
+
+/* SMALL ARROW */
+
+.social-arrow {
+    font-size: 10px;
+
+    opacity: 0;
+
+    transform: translate(-4px, 4px);
+
+    transition: all .3s ease;
+}
+
+
+/* HOVER */
+
+.hero-socials .social-link:hover {
+    color: #fff;
+
+    background: rgba(255, 65, 54, 0.08);
+
+    transform: translateY(-2px);
+}
+
+
+.hero-socials .social-link:hover .social-icon {
+    color: #fff;
+
+    background: #ff4136;
+    border-color: #ff4136;
+
+    box-shadow:
+        0 0 15px rgba(255, 65, 54, 0.35);
+}
+
+
+.hero-socials .social-link:hover .social-arrow {
+    opacity: 1;
+
+    transform: translate(0, 0);
+}
+
+  @media (max-width: 767px) {
+
+    .hero-socials {
+        gap: 10px;
+        padding: 7px 9px 7px 12px;
+    }
+
+    .social-title {
+        font-size: 9px;
+        padding-right: 10px;
+    }
+
+    .social-name,
+    .social-arrow {
+        display: none;
+    }
+
+    .hero-socials .social-link {
+        padding: 3px;
+    }
+
+    .social-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+}
   .hero-socials span.idx-label{color:var(--muted-dark); margin-right:2px; color:var(--muted);}
   .hero-socials a{color:var(--muted); border-bottom:1px solid transparent; padding-bottom:2px; transition:.2s;}
   .hero-socials a:hover{color:var(--ember); border-color:var(--ember);}
@@ -847,13 +1048,51 @@ font-weight:500;
           <a href="#specialised" class="btn btn-ghost" data-cursor="grow">What I Do</a>
         </div>
       </div>
-      <div class="hero-socials reveal">
-        <span class="idx-label">Connect —</span>
-        <a href="#" aria-label="GitHub" data-cursor="grow">GitHub</a>
-        <a href="#" aria-label="LinkedIn" data-cursor="grow">LinkedIn</a>
-        <a href="#" aria-label="WhatsApp" data-cursor="grow">WhatsApp</a>
-        <a href="#" aria-label="Email" data-cursor="grow">Email</a>
-      </div>
+     <div class="hero-socials reveal">
+    <span class="social-title">
+        <span class="social-dot"></span>
+        Connect
+    </span>
+
+    <div class="social-links">
+
+        <a href="#" class="social-link" aria-label="GitHub" data-cursor="grow">
+            <span class="social-icon">
+                <i class="fa-brands fa-github"></i>
+            </span>
+            <span class="social-name">GitHub</span>
+            <span class="social-arrow">↗</span>
+        </a>
+
+        <a href="#" class="social-link" aria-label="LinkedIn" data-cursor="grow">
+            <span class="social-icon">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </span>
+            <span class="social-name">LinkedIn</span>
+            <span class="social-arrow">↗</span>
+        </a>
+
+        <a href="#" class="social-link" aria-label="WhatsApp" data-cursor="grow">
+            <span class="social-icon">
+                <i class="fa-brands fa-whatsapp"></i>
+            </span>
+            <span class="social-name">WhatsApp</span>
+            <span class="social-arrow">↗</span>
+        </a>
+
+        <a href="mailto:yourmail@example.com"
+           class="social-link"
+           aria-label="Email"
+           data-cursor="grow">
+            <span class="social-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </span>
+            <span class="social-name">Email</span>
+            <span class="social-arrow">↗</span>
+        </a>
+
+    </div>
+</div>
     </div>
   </div>
 
