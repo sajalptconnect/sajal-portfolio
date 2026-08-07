@@ -1111,6 +1111,81 @@
   .tag-3{bottom:-16%; left:6%; animation-delay:2s;}
   @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-9px);}}
 
+
+
+
+  /*======================================
+ MORE PROJECTS BUTTON
+======================================*/
+
+.more-projects-wrapper{width:100%;display:flex;justify-content:center;align-items:center;margin:40px auto 0;clear:both;}
+
+.more-projects-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+
+    padding:18px 42px;
+
+    border:2px solid #111;
+    border-radius:60px;
+
+    background:#111;
+    color:#fff;
+
+    text-decoration:none;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:14px;
+    font-weight:600;
+
+    transition:.35s ease;
+}
+
+.more-projects-btn svg{
+    transition:.35s ease;
+}
+
+.more-projects-btn:hover{
+    background:#fff;
+    color:#111;
+    transform:translateY(-4px);
+    box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.more-projects-btn:hover svg{
+    transform:translateX(6px);
+}
+
+/* Tablet */
+
+@media (max-width:768px){
+
+    .more-projects-wrapper{width:100%;display:flex;justify-content:center;align-items:center;margin:40px auto 0;clear:both;}
+
+    .more-projects-btn{
+        padding:16px 34px;
+        font-size:13px;
+        letter-spacing:1.5px;
+    }
+}
+
+/* Mobile */
+
+@media (max-width:480px){
+
+    .more-projects-wrapper{width:100%;display:flex;justify-content:center;align-items:center;margin:40px auto 0;clear:both;}
+
+    .more-projects-btn{
+        width:100%;
+        justify-content:center;
+        padding:16px;
+        font-size:13px;
+    }
+}
+
+/*----------end -----------------*/
+
   /* ===== MARQUEE ===== */
   .marquee-wrap{background:var(--ember); padding:24px 0; overflow:hidden; position:relative; z-index:1; border-top:1px solid var(--black); border-bottom:1px solid var(--black);}
   .marquee-wrap.reverse{background:var(--black); border-color:var(--line-dark);}
@@ -1343,55 +1418,386 @@ font-weight:500;
     color:var(--muted); border:1px solid var(--line-dark); padding:6px 11px; border-radius:100px; white-space:nowrap;
   }
 
-  /* ===== PROJECTS ===== */
-  #projects{background:var(--white); color:var(--ink);}
-  .project-panel{
-    display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center;
-    padding:80px 0; border-bottom:1px solid var(--line-light);
+  /* ===== PROJECTS / PORTFOLIO STACK ===== */
+
+  #projects{
+    background:var(--white);
+    color:var(--ink);
+    overflow:visible;
   }
-  .project-panel:first-of-type{padding-top:0;}
-  .project-panel:last-of-type{border-bottom:none;}
+
+  .projects-editorial{
+    position:relative;
+    overflow:visible;
+  }
+
+  /* Desktop: editorial two-column project cards */
+  .project-panel{
+    position:sticky;
+    top:calc(var(--nav-h) + 28px);
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+
+    min-height:650px;
+    padding:70px 40px;
+
+    background:var(--white);
+    border:1px solid var(--line-light);
+    border-radius:18px;
+
+    margin-bottom:80px;
+
+    overflow:hidden;
+
+    z-index:1;
+  }
+
+  .project-panel:nth-child(1){z-index:1;}
+  .project-panel:nth-child(2){z-index:2;}
+  .project-panel:nth-child(3){z-index:3;}
+
+  /*
+    The global .reveal animation uses transform.
+    Transforming a sticky element can interfere with
+    sticky positioning, so project cards stay stable.
+  */
+  .project-panel.reveal{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+
+  .project-panel.reveal.in{
+    opacity:1;
+    transform:none;
+  }
+
+  .project-panel:first-of-type{
+    padding-top:70px;
+  }
+
+  .project-panel:last-of-type{
+    border-bottom:none;
+  }
+
+  /* Alternating desktop layout */
   .project-panel.rev .project-media{order:2;}
   .project-panel.rev .project-copy{order:1;}
+
+  /* Project screenshot */
   .project-media{
     position:relative;
+    width:100%;
     overflow:hidden;
     border-radius:10px;
     background:#fff;
+  }
 
-    aspect-ratio:unset;
-    height:auto;
-}
- .project-media img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:top;
+  .project-media img{
     display:block;
-     transform:none !important;
-    /* transform:scale(1.08);
-    transition:transform .8s var(--ease); */
-}
-  .project-panel:hover .project-media img{transform:scale(1);}
+    width:100%;
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+    object-position:center top;
+    transform:none !important;
+  }
+
+  .project-panel:hover .project-media img{
+    transform:none !important;
+  }
+
   .project-badge{
-    position:absolute; top:16px; left:16px; background:var(--ember); color:var(--black);
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase;
-    padding:7px 13px; border-radius:100px; z-index:2; font-weight:600;
+    position:absolute;
+    top:16px;
+    left:16px;
+    background:var(--ember);
+    color:var(--black);
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:7px 13px;
+    border-radius:100px;
+    z-index:2;
+    font-weight:600;
+    display: none;
   }
-  .project-copy .project-num{font-family:'Anton',sans-serif; font-size:clamp(60px,7vw,110px); color:var(--line-light); line-height:1; margin-bottom:6px;}
-  .project-copy h3{font-size:clamp(30px,4vw,54px); margin-bottom:20px; font-weight:400;}
-  .project-copy p{color:var(--muted-dark); font-size:16px; line-height:1.7; max-width:460px; margin-bottom:22px; font-family:'Inter',sans-serif;}
-  .project-tags{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px;}
+
+  .project-copy .project-num{
+    font-family:'Anton',sans-serif;
+    font-size:clamp(60px,7vw,110px);
+    color:var(--line-light);
+    line-height:1;
+    margin-bottom:6px;
+  }
+
+  .project-copy h3{
+    font-size:clamp(30px,4vw,54px);
+    margin-bottom:20px;
+    font-weight:400;
+  }
+
+  .project-copy p{
+    color:var(--muted-dark);
+    font-size:16px;
+    line-height:1.7;
+    max-width:460px;
+    margin-bottom:22px;
+    font-family:'Inter',sans-serif;
+  }
+
+  .project-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:26px;
+  }
+
   .project-tags span{
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
-    color:var(--muted-dark); border:1px solid var(--line-light); padding:6px 12px; border-radius:100px; white-space:nowrap;
+    font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--muted-dark);
+    border:1px solid var(--line-light);
+    padding:6px 12px;
+    border-radius:100px;
+    white-space:nowrap;
   }
+
   .project-link{
-    display:inline-flex; align-items:center; gap:10px;
-    font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
-    color:var(--ink); padding-bottom:4px; border-bottom:1px solid var(--ink); width:max-content; transition:gap .25s, color .25s, border-color .25s;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    color:var(--ink);
+    padding-bottom:4px;
+    border-bottom:1px solid var(--ink);
+    width:max-content;
+    transition:gap .25s,color .25s,border-color .25s;
   }
-  .project-link:hover{gap:15px; color:var(--ember); border-color:var(--ember);}
+
+  .project-link:hover{
+    gap:15px;
+    color:var(--ember);
+    border-color:var(--ember);
+  }
+
+  /* Tablet */
+  @media (max-width:980px){
+    .project-panel{
+      grid-template-columns:1fr;
+      gap:32px;
+      padding:56px 0;
+    }
+
+    .project-panel.rev .project-media{order:1;}
+    .project-panel.rev .project-copy{order:2;}
+  }
+
+  /* Mobile stack */
+  @media (max-width:680px){
+
+    #projects{
+      overflow:visible;
+      padding-bottom:calc(var(--bottom-nav-h) + 40px);
+    }
+
+    #projects .wrap{
+      overflow:visible;
+    }
+
+    .projects-editorial{
+      width:100%;
+      padding:0;
+      overflow:visible;
+    }
+
+    .project-panel{
+      position:sticky;
+      top:calc(var(--nav-h) + 12px);
+
+      display:flex;
+      flex-direction:column;
+
+      width:100%;
+      min-height:0;
+
+      padding:0;
+      margin:0 0 55px;
+
+      background:var(--white);
+
+      border:1px solid var(--line-light);
+      border-radius:16px;
+
+      overflow:hidden;
+
+      box-shadow:0 12px 38px rgba(0,0,0,.09);
+
+      z-index:1;
+    }
+
+    .project-panel:nth-child(1){z-index:1;}
+    .project-panel:nth-child(2){z-index:2;}
+    .project-panel:nth-child(3){z-index:3;}
+
+    /* Keep reveal from breaking sticky */
+    .project-panel.reveal,
+    .project-panel.reveal.in{
+      opacity:1;
+      transform:none;
+      transition:none;
+    }
+
+    .project-media{
+      width:100%;
+      height: 192px;
+      aspect-ratio:auto;
+      overflow:hidden;
+      border-radius:12px;
+      background:#fff;
+      order:1 !important;
+    }
+
+    /*
+      Show the complete website screenshot.
+      Do NOT use height:100% or object-fit:cover here.
+    */
+    .project-media img{
+      display:block;
+      width:100%;
+      height:auto;
+      max-width:100%;
+      object-fit:contain;
+      object-position:center top;
+      transform:none !important;
+    }
+
+    .project-badge{
+      top:14px;
+      left:14px;
+      font-size:9px;
+      padding:7px 12px;
+    }
+
+    .project-copy{
+      width:100%;
+      padding:24px 20px 28px;
+      order:2 !important;
+    }
+
+    .project-copy .project-num{
+      font-size:58px;
+      line-height:.85;
+      margin-bottom:12px;
+    }
+
+    .project-copy h3{
+      font-size:clamp(28px,8vw,40px);
+      line-height:1.05;
+      margin-bottom:15px;
+    }
+
+    .project-copy p{
+      max-width:100%;
+      font-size:14px;
+      line-height:1.6;
+      margin-bottom:20px;
+    }
+
+    .project-tags{
+      gap:6px;
+      margin-bottom:22px;
+    }
+
+    .project-tags span{
+      font-size:9px;
+      padding:6px 9px;
+    }
+
+    .project-link{
+      font-size:11px;
+      gap:8px;
+    }
+  }
+
+  /* Small phones */
+  @media (max-width:480px){
+
+    .project-panel{
+      top:calc(var(--nav-h) + 8px);
+      margin-bottom:45px;
+      border-radius:14px;
+    }
+
+    .project-copy{
+      padding:21px 16px 25px;
+    }
+
+    .project-copy .project-num{
+      font-size:54px;
+    }
+
+    .project-copy h3{
+      font-size:29px;
+    }
+
+    .project-copy p{
+      font-size:13.5px;
+    }
+  }
+
+
+  /*------------social icons -------------*/
+
+  /* Social brand colors */
+
+.social-link:nth-child(2) .social-icon i {
+    color: #0A66C2; /* LinkedIn */
+}
+
+.social-link:nth-child(3) .social-icon i {
+    color: #1769FF; /* Behance */
+}
+
+.social-link:nth-child(4) .social-icon i {
+    color: #E4405F; /* Instagram */
+}
+
+.linkedin-icon i {
+    color: #0A66C2;
+}
+
+.behance-icon i {
+    color: #1769FF;
+}
+
+.instagram-icon i {
+    color: #E4405F;
+}
+
+.instagram-icon i {
+    background: linear-gradient(
+        45deg,
+        #F58529,
+        #DD2A7B,
+        #8134AF,
+        #515BD4
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
   /* ===== ABOUT ===== */
   .about-grid{display:grid; grid-template-columns:.8fr 1.2fr; gap:80px; align-items:start;}
@@ -1691,7 +2097,7 @@ font-weight:500;
       <a href="#contact">Contact</a>
     </nav>
     <div class="nav-right">
-      <a href="#contact" class="nav-cta"><i class="pulse-dot"></i> Available for Work</a>
+      <a href="more-works.html" class="nav-cta"><i class="pulse-dot"></i>WORKS</a>
       <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="fullMenu">
         <span></span><span></span><span></span>
         <span class="label">Menu</span>
@@ -1784,38 +2190,38 @@ font-weight:500;
 
     <div class="social-links">
 
-        <a href="#" class="social-link" aria-label="GitHub" data-cursor="grow">
+        <!-- <a href="#" class="social-link" aria-label="GitHub" data-cursor="grow">
             <span class="social-icon">
                 <i class="fa-brands fa-github"></i>
             </span>
             <span class="social-name">GitHub</span>
             <span class="social-arrow">↗</span>
-        </a>
+        </a> -->
 
-        <a href="#" class="social-link" aria-label="LinkedIn" data-cursor="grow">
-            <span class="social-icon">
+        <a href="https://www.linkedin.com/in/sajalpt/" class="social-link" aria-label="LinkedIn" data-cursor="grow">
+            <span class="social-icon linkedin-icon">
                 <i class="fa-brands fa-linkedin-in"></i>
             </span>
             <span class="social-name">LinkedIn</span>
             <span class="social-arrow">↗</span>
         </a>
 
-        <a href="#" class="social-link" aria-label="WhatsApp" data-cursor="grow">
-            <span class="social-icon">
-                <i class="fa-brands fa-whatsapp"></i>
+        <a href="https://www.behance.net/sajall" class="social-link" aria-label="WhatsApp" data-cursor="grow">
+            <span class="social-icon behance-icon">
+                <i class="fa-brands fa-behance"></i>
             </span>
-            <span class="social-name">WhatsApp</span>
+            <span class="social-name">Behance</span>
             <span class="social-arrow">↗</span>
         </a>
 
-        <a href="mailto:yourmail@example.com"
+        <a href="instagram.com/sajalpt/"
            class="social-link"
            aria-label="Email"
            data-cursor="grow">
-            <span class="social-icon">
-                <i class="fa-regular fa-envelope"></i>
+            <span class="social-icon instagram-icon">
+                <i class="fa-brands fa-instagram"></i>
             </span>
-            <span class="social-name">Email</span>
+            <span class="social-name">Instagram</span>
             <span class="social-arrow">↗</span>
         </a>
 
@@ -1843,7 +2249,7 @@ font-weight:500;
           <path d="M50 165c8-30 30-46 50-46s42 16 50 46" stroke="#FF4433" stroke-width="1.4" opacity=".8"/>
           <path d="M40 30 L60 30 L60 34 L44 34 L44 46 L58 46 L58 50 L44 50 L44 64 L40 64 Z" fill="#FF4433" opacity=".5"/>
         </svg> -->
-        <img  src="images/sajal.png" alt="">
+        <img  src="images/sajal1.jpg" alt="">
       </div>
       <div class="stat-row">
         <div class="stat-card"><b class="count-up" data-target="3">0</b><span>Years Experience</span></div>
@@ -2063,52 +2469,57 @@ font-weight:500;
       <div class="project-panel reveal">
         <div class="project-media" data-cursor="view">
           <span class="project-badge">E-Commerce</span>
-          <img src="images/project-tenderwonder.png" alt="Tender Wonder website homepage screenshot">
+          <img src="images/project-tenderwonder.jpeg" alt="Tender Wonder website homepage screenshot">
         </div>
         <div class="project-copy">
           <div class="project-num">01</div>
           <h3>Tender Wonder</h3>
           <p>A clean, product-led WooCommerce store for a natural coconut water brand, built with custom product layouts and integrated live-chat support.</p>
           <div class="project-tags"><span>WordPress</span><span>WooCommerce</span><span>Elementor</span></div>
-          <a href="#" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
+          <a href="https://tenderwonder.net/" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
         </div>
       </div>
 
       <div class="project-panel rev reveal">
         <div class="project-media" data-cursor="view">
           <span class="project-badge">Gallery / Events</span>
-          <img src="images/project-daddyzart.png" alt="Daddyz Art Gallery website homepage screenshot">
+          <img src="images/project-daddyzart.jpeg" alt="Daddyz Art Gallery website homepage screenshot">
         </div>
         <div class="project-copy">
           <div class="project-num">02</div>
-          <h3>Daddyz Art Gallery</h3>
-          <p>A moody, editorial-style site for an art gallery, featuring artist showcases, event listings, and a dedicated art-competition registration flow.</p>
+          <h3>Perumpallil</h3>
+          <p>A trading, contracting, and supply chain management website , we serve construction, industrial, and corporate sectors with efficiency and reliability.</p>
           <div class="project-tags"><span>WordPress</span><span>Custom Theme</span><span>UI/UX</span></div>
-          <a href="#" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
+          <a href="https://perumpallil.com/" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
         </div>
       </div>
 
       <div class="project-panel reveal">
         <div class="project-media" data-cursor="view">
           <span class="project-badge">Agency</span>
-          <img src="images/project-creatif.png" alt="Creatif Digital Solutions website homepage screenshot">
+          <img src="images/project-creatif.jpeg" alt="Creatif Digital Solutions website homepage screenshot">
         </div>
         <div class="project-copy">
           <div class="project-num">03</div>
           <h3>Creatif Digital Solutions</h3>
           <p>A bold, high-contrast portfolio site for a digital agency, built around a strong typographic hero and a clear services-to-contact funnel.</p>
           <div class="project-tags"><span>WordPress</span><span>Elementor</span><span>Branding</span></div>
-          <a href="#" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
+          <a href="https://creatifdigitalsolutions.com/" class="project-link" target="_blank" rel="noopener" data-cursor="grow">Visit Site <span class="btn-arrow">↗</span></a>
         </div>
       </div>
 
     </div>
   </div>
+<div class="more-projects-wrapper">
+    <a href="more-works.html" class="more-projects-btn">
+        <span>More Projects</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M13 6L19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+    </a>
+</div>
 </section>
-
-
-
-
 
 <!-- ===================== CONTACT ===================== -->
 <section id="contact" class="contact-section section--dark">
@@ -2120,8 +2531,23 @@ font-weight:500;
         <h2>Looking for a<br>developer? I'm<br>here for you.</h2>
         <p>Whether you're starting a new project or just want to say hi, I'd love to hear from you. Fill out the form and I'll get back to you shortly.</p>
 
-        <div class="info-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>ptsajal@gmail.com</span></div>
-        <div class="info-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.9.6a2 2 0 0 1 1.7 2Z"/></svg><span>+9181 2976 1214</span></div>
+       <div class="info-line">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <rect x="3" y="5" width="18" height="14" rx="2"/>
+    <path d="m3 7 9 6 9-6"/>
+  </svg>
+
+  <a href="mailto:ptsajal@gmail.com">
+    ptsajal@gmail.com
+  </a>
+</div>
+       <div class="info-line">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 2 .6 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.5 2.9.6a2 2 0 0 1 1.7 2Z"/>
+  </svg>
+
+  <a href="tel:+918129761214">+91 81 2976 1214</a>
+</div>
         <div class="info-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Dubai, UAE</span></div>
 
         <div class="avail-pill"><i class="pulse-dot"></i> Available for freelance &amp; full-time roles</div>
@@ -2281,7 +2707,7 @@ font-weight:500;
     const el = document.getElementById('cycleWord');
     if (!el || reduceMotion || !window.gsap) return;
     // words drawn only from services already listed on this page
-    const words = ['WordPress.', 'Elementor.', 'UI/UX.', 'SEO.'];
+    const words = ['WordPress.', 'Elementor.', 'WordPress', 'WordPress'];
     let idx = 0;
 
     function splitToLetters(word){
@@ -2446,17 +2872,60 @@ font-weight:500;
   }, {threshold:0.5});
   countEls.forEach(el=>countIo.observe(el));
 
-  /* ---------- SCROLL-TRIGGERED PROJECT IMAGE PARALLAX ---------- */
-  if (window.gsap && window.ScrollTrigger && !reduceMotion){
-    gsap.registerPlugin(ScrollTrigger);
-    document.querySelectorAll('.project-media img').forEach(img=>{
-      gsap.fromTo(img, {yPercent:-6}, {
-        yPercent:6, ease:'none',
-        scrollTrigger:{ trigger: img.closest('.project-panel'), start:'top bottom', end:'bottom top', scrub:true }
-      });
-    });
-    document.querySelectorAll('.service-row, .project-panel, .about-visual, .ledger-item, .footer-cta').forEach(()=>{});
-  }
+  /*------------projects---------------------------------*/
+
+  
+
+// document.addEventListener("DOMContentLoaded", function () {
+
+//     const panels = document.querySelectorAll(".project-panel");
+
+//     function updateStack() {
+
+//         const isMobile = window.innerWidth <= 900;
+
+//         panels.forEach((panel, index) => {
+
+//             if (index === panels.length - 1) return;
+
+//             const nextPanel = panels[index + 1];
+//             const nextRect = nextPanel.getBoundingClientRect();
+
+//             const stackTop = isMobile ? 20 : 70;
+
+//             const distance = nextRect.top - stackTop;
+
+//             let scale = 1;
+
+//             if (distance < 300) {
+
+//                 scale = 0.94 + (distance / 300) * 0.06;
+
+//                 scale = Math.max(
+//                     0.94,
+//                     Math.min(1, scale)
+//                 );
+//             }
+
+//             panel.style.transform = `scale(${scale})`;
+//         });
+//     }
+
+//     window.addEventListener(
+//         "scroll",
+//         updateStack,
+//         { passive: true }
+//     );
+
+//     window.addEventListener(
+//         "resize",
+//         updateStack
+//     );
+
+//     updateStack();
+
+// });
+
 
   /* ---------- MARQUEE: continuous + scroll-velocity aware, direction change on scroll dir ---------- */
   function setupMarquee(id, baseSpeed, initialDir){
@@ -2499,7 +2968,8 @@ font-weight:500;
   window.addEventListener('load', ()=>{ if (window.ScrollTrigger) ScrollTrigger.refresh(); });
 })();
 </script>
-  <!-- Elfsight WhatsApp Chat | Untitled WhatsApp Chat -->
+
+ <!-- Elfsight WhatsApp Chat | Untitled WhatsApp Chat -->
 <script src="https://elfsightcdn.com/platform.js" async></script>
 <div class="elfsight-app-e21a99d4-57b7-4ea0-bcb8-30d8799519bc" data-elfsight-app-lazy></div>
 </body>
