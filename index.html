@@ -2829,36 +2829,36 @@ font-weight:500;
 /*------------form--------*/
 
   
-document.getElementById("contactForm").addEventListener("submit", function(e) {
-    e.preventDefault();
+// document.getElementById("contactForm").addEventListener("submit", function(e) {
+//     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const projectType = document.getElementById("projectType").value;
-    const message = document.getElementById("message").value;
+//     const name = document.getElementById("name").value;
+//     const email = document.getElementById("email").value;
+//     const phone = document.getElementById("phone").value;
+//     const projectType = document.getElementById("projectType").value;
+//     const message = document.getElementById("message").value;
 
-    const recipient = "ptsajal@gmail.com";
+//     const recipient = "ptsajal@gmail.com";
 
-    const subject = `New Project Enquiry - ${name}`;
+//     const subject = `New Project Enquiry - ${name}`;
 
-    const body = `
-New Website Enquiry
+//     const body = `
+// New Website Enquiry
 
-Full Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Project Type: ${projectType}
+// Full Name: ${name}
+// Email: ${email}
+// Phone: ${phone}
+// Project Type: ${projectType}
 
-Message:
-${message}
-    `;
+// Message:
+// ${message}
+//     `;
 
-    const mailtoLink =
-        `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+//     const mailtoLink =
+//         `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    window.location.href = mailtoLink;
-});
+//     window.location.href = mailtoLink;
+// });
   /* ---------- CUSTOM CURSOR ---------- */
   if (!isTouch && !reduceMotion){
     const dot = document.getElementById('cursorDot');
