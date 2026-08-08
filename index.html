@@ -79,12 +79,15 @@
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:10px;
     font-family:'JetBrains Mono',monospace; font-weight:600; font-size:13px; letter-spacing:.06em; text-transform:uppercase;
-    padding:18px 32px; border-radius:2px; cursor:pointer; border:1px solid transparent;
+    padding:18px 32px; border-radius:47px; cursor:pointer; border:1px solid transparent;
     transition:transform .3s var(--ease), background .25s, border-color .25s, color .25s;
     white-space:nowrap; position:relative; overflow:hidden;
   }
   .btn:active{transform:scale(.96);}
-  .btn-primary{background: #ffffff; color:var(--black);}
+ .btn-primary {
+    background: #ffffff;
+    color: var(--black);
+}
   .btn-primary:hover{background:var(--white); color:var(--black);}
   .btn-ghost{background:transparent; border-color:var(--line-dark); color:var(--white);}
   .btn-ghost:hover{border-color:var(--ember); color:var(--ember);}
@@ -1188,7 +1191,7 @@
 /*----------end -----------------*/
 
   /* ===== MARQUEE ===== */
-  .marquee-wrap{background:var(--ember); padding:24px 0; overflow:hidden; position:relative; z-index:1; border-top:1px solid var(--black); border-bottom:1px solid var(--black);}
+  .marquee-wrap{background: #ffffff; padding:24px 0; overflow:hidden; position:relative; z-index:1; border-top:1px solid var(--black); border-bottom:1px solid var(--black);}
   .marquee-wrap.reverse{background:var(--black); border-color:var(--line-dark);}
   .marquee-track{display:flex; gap:56px; width:max-content;}
   .marquee-track span{
