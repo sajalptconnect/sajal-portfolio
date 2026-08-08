@@ -2523,7 +2523,7 @@ font-weight:500;
 </section>
 
 <!-- ===================== CONTACT ===================== -->
-<section id="contact" class="contact-section section--dark">
+<!-- <section id="contact" class="contact-section section--dark">
   <div class="contact-watermark" aria-hidden="true">TALK</div>
   <div class="wrap">
     <div class="contact-panel reveal">
@@ -2576,7 +2576,59 @@ font-weight:500;
       </form>
     </div>
   </div>
-</section>
+</section> --> 
+
+  <form id="contactForm">
+
+  <div class="field">
+    <label>Full Name</label>
+    <input type="text" id="name" placeholder="Your name" required>
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <input type="email" id="email" placeholder="you@company.com" required>
+  </div>
+
+  <div class="field">
+    <label>Phone</label>
+    <input type="tel" id="phone" placeholder="+971">
+  </div>
+
+  <div class="field">
+    <label>Project Type</label>
+    <select id="projectType">
+      <option>WordPress Website</option>
+      <option>UI / UX Design</option>
+      <option>Custom Functionality</option>
+      <option>Hosting &amp; Maintenance</option>
+      <option>SEO Optimisation</option>
+    </select>
+  </div>
+
+  <div class="field full">
+    <label>Message</label>
+    <textarea
+      id="message"
+      placeholder="Tell me a bit about your project..."
+      required
+    ></textarea>
+  </div>
+
+  <div class="field full">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      data-cursor="grow"
+    >
+      Send Message
+      <span class="btn-arrow">↗</span>
+    </button>
+
+    <p class="form-note">I usually reply within 24 hours.</p>
+  </div>
+
+</form>
 
 <!-- ===================== FOOTER ===================== -->
 <footer>
@@ -2774,7 +2826,40 @@ font-weight:500;
       else { target.scrollIntoView({behavior: reduceMotion ? 'auto':'smooth', block:'start'}); }
     });
   });
+/*------------form--------*/
 
+  <script>
+document.getElementById("contactForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const projectType = document.getElementById("projectType").value;
+    const message = document.getElementById("message").value;
+
+    const recipient = "ptsajal@gmail.com";
+
+    const subject = `New Project Enquiry - ${name}`;
+
+    const body = `
+New Website Enquiry
+
+Full Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Project Type: ${projectType}
+
+Message:
+${message}
+    `;
+
+    const mailtoLink =
+        `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoLink;
+});
+</script>
   /* ---------- CUSTOM CURSOR ---------- */
   if (!isTouch && !reduceMotion){
     const dot = document.getElementById('cursorDot');
